@@ -1,0 +1,1 @@
+# snowflake-connecting-script
