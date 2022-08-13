@@ -8,6 +8,8 @@ mysqlconn = pymysql.connect(host='mysql-rfam-public.ebi.ac.uk', port=4497, user=
 cursor = mysqlconn.cursor()
 query = 'select * from family'
 
+
+###give location value to a easy way to get###
 results = pandas.read_sql_query(query, mysqlconn)
 results.to_csv("C:/Users/Hi/Desktop/python/snowflake/data loading/output.csv", index=False, header=False) ## Toggle header as necessary.
 
@@ -70,7 +72,7 @@ conn.cursor().execute( """ CREATE TABLE IF NOT EXISTS FAMILY(
 
 #Step 5 #CLEAN TABLE  AND COPY DATA--- #########
 conn.cursor().execute("use warehouse compute_wh")
-conn.cursor().execute(r"put file://c:/temp/output.csv @%Family")
+conn.cursor().execute(r"put file://c:/temp/output.csv @%Family")###giva the location data correctly only then it will load the data correctly###
 conn.cursor().execute("COPY INTO FAMILY file_format = TrainingDB.SALES.CSV_FILE")
 
 
